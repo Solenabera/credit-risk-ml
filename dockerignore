@@ -1,0 +1,10 @@
+# .dockerignore
+venv/
+__pycache__/
+.ipynb_checkpoints/
+data/
+notebooks/
+mlruns/
+mlflow.db
+.git/
+.env

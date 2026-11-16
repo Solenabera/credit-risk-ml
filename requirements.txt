@@ -126,8 +126,6 @@ python-dotenv==1.2.4
 python-json-logger==4.2.0
 python-multipart==0.0.33
 pytz==2026.6
-pywin32==312
-pywinpty==3.1.2
 PyYAML==6.0.3
 pyzmq==27.3.0
 qtconsole==5.7.2
