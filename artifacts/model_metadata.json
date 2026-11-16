@@ -1,0 +1,81 @@
+{
+  "model_name": "Credit Risk Scoring and Assessment System",
+  "model_version": "1.0.0",
+  "training_timestamp": "2026-11-16T12:21:55.293050+00:00",
+  "mlflow_run_id": "58cf1aaff6ef4e298496425e7ec2b665",
+  "algorithm": "XGBoost + CalibratedBinaryClassifier (Isotonic)",
+  "num_features": 17,
+  "feature_names": [
+    "RevolvingUtilizationOfUnsecuredLines",
+    "age",
+    "NumberOfTime30-59DaysPastDueNotWorse",
+    "DebtRatio",
+    "MonthlyIncome",
+    "NumberOfOpenCreditLinesAndLoans",
+    "NumberOfTimes90DaysLate",
+    "NumberRealEstateLoansOrLines",
+    "NumberOfTime60-89DaysPastDueNotWorse",
+    "NumberOfDependents",
+    "MonthlyIncome_Missing",
+    "NumberOfDependents_Missing",
+    "DelinquencyDataAnomaly",
+    "TotalPastDue",
+    "HasPastDue",
+    "IncomePerCapita",
+    "EstimatedDebtPayment"
+  ],
+  "optimal_threshold": 0.0742,
+  "cost_sensitive_threshold": 0.08919191919191918,
+  "validation_metrics": {
+    "roc_auc": 0.8733,
+    "gini_coefficient": 0.7466,
+    "ks_statistic": 0.5928,
+    "ks_optimal_threshold": 0.0742,
+    "brier_score": 0.0482,
+    "decision_threshold": 0.0742,
+    "precision": 0.2262,
+    "recall": 0.7819,
+    "f1_score": 0.3509,
+    "specificity": 0.8084,
+    "true_positives": 1176,
+    "false_positives": 4023,
+    "true_negatives": 16973,
+    "false_negatives": 328
+  },
+  "credit_score_config": {
+    "base_score": 700,
+    "base_odds": 20.0,
+    "pdo": 40.0,
+    "min_score": 300,
+    "max_score": 850,
+    "tiers": [
+      {
+        "name": "Tier 1 - Excellent (Low Risk)",
+        "min_score": 740,
+        "action": "APPROVE_INSTANT",
+        "pd_max": 0.025
+      },
+      {
+        "name": "Tier 2 - Good (Moderate Risk)",
+        "min_score": 670,
+        "action": "APPROVE_STANDARD",
+        "pd_max": 0.075
+      },
+      {
+        "name": "Tier 3 - Fair (Elevated Risk)",
+        "min_score": 580,
+        "action": "MANUAL_REVIEW",
+        "pd_max": 0.15
+      },
+      {
+        "name": "Tier 4 - Subprime (High Risk)",
+        "min_score": 300,
+        "action": "REJECT",
+        "pd_max": 1.0
+      }
+    ]
+  },
+  "training_samples": 105000,
+  "validation_samples": 22500,
+  "test_samples": 22500
+}

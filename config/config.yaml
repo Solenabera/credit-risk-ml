@@ -1,0 +1,89 @@
+project:
+  name: "Credit Risk Scoring and Assessment System"
+  version: "1.0.0"
+  description: "Enterprise credit risk scoring, probability calibration, and explainability microservice"
+
+data:
+  raw_train_path: "data/cs-training.csv"
+  raw_test_path: "data/cs-test.csv"
+  target_column: "SeriousDlqin2yrs"
+  id_column: "Unnamed: 0"
+  split:
+    train_ratio: 0.70
+    val_ratio: 0.15
+    test_ratio: 0.15
+    random_state: 42
+    stratify: true
+
+features:
+  numerical_cols:
+    - "RevolvingUtilizationOfUnsecuredLines"
+    - "age"
+    - "NumberOfTime30-59DaysPastDueNotWorse"
+    - "DebtRatio"
+    - "MonthlyIncome"
+    - "NumberOfOpenCreditLinesAndLoans"
+    - "NumberOfTimes90DaysLate"
+    - "NumberRealEstateLoansOrLines"
+    - "NumberOfTime60-89DaysPastDueNotWorse"
+    - "NumberOfDependents"
+  capping:
+    revolving_utilization_max: 2.0
+    age_min: 18
+    debt_ratio_max: 10.0
+  delinquency_cols:
+    - "NumberOfTime30-59DaysPastDueNotWorse"
+    - "NumberOfTime60-89DaysPastDueNotWorse"
+    - "NumberOfTimes90DaysLate"
+  delinquency_anomaly_codes: [96, 98]
+
+model:
+  type: "xgboost"
+  params:
+    max_depth: 4
+    learning_rate: 0.05
+    n_estimators: 250
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    eval_metric: "auc"
+    use_label_encoder: false
+  calibration:
+    enabled: true
+    method: "isotonic" # 'isotonic' or 'sigmoid'
+
+credit_score:
+  base_score: 700
+  base_odds: 20.0 # 20 to 1 non-default to default
+  pdo: 40.0       # Points to double odds
+  min_score: 300
+  max_score: 850
+  tiers:
+    - name: "Tier 1 - Excellent (Low Risk)"
+      min_score: 740
+      action: "APPROVE_INSTANT"
+      pd_max: 0.025
+    - name: "Tier 2 - Good (Moderate Risk)"
+      min_score: 670
+      action: "APPROVE_STANDARD"
+      pd_max: 0.075
+    - name: "Tier 3 - Fair (Elevated Risk)"
+      min_score: 580
+      action: "MANUAL_REVIEW"
+      pd_max: 0.150
+    - name: "Tier 4 - Subprime (High Risk)"
+      min_score: 300
+      action: "REJECT"
+      pd_max: 1.000
+      action: "REJECT"
+      pd_max: 1.000
+
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "Credit_Risk_Scoring"
+
+artifacts:
+  dir: "artifacts"
+  pipeline_file: "artifacts/credit_scoring_pipeline_v1.joblib"
+  metadata_file: "artifacts/model_metadata.json"
+  threshold_file: "artifacts/optimal_threshold.txt"

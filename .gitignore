@@ -1,6 +1,40 @@
+# Virtual environments
 venv/
+.venv/
+env/
+ENV/
+
+# Python bytecode & cache
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Jupyter Notebooks checkpoints
 .ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Data files
 data/
-# *.joblib
+!data/sampleEntry.csv
+
+# MLflow tracking and SQLite databases
+mlruns/
+mlflow.db
+notebooks/mlruns/
+notebooks/mlflow.db
+*.sqlite
+*.db
+
+# Logs and environment variables
+*.log
 .env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,30 @@
+# Version control
+.git/
+.gitignore
+
+# Virtual environments and caches
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Data and Notebooks (keep image lightweight)
+data/
+notebooks/
+notebooks/mlruns/
+notebooks/mlflow.db
+
+# MLflow tracking local files
+mlruns/
+mlflow.db
+
+# Environment variables and secrets
+.env
+.env.*
+*.log

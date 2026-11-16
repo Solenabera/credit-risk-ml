@@ -1,0 +1,35 @@
+{
+  "model_version": "1.0.0",
+  "test_sample_count": 22500,
+  "test_default_count": 1504,
+  "test_default_rate_pct": 6.68,
+  "decision_threshold_applied": 0.0742,
+  "metrics": {
+    "roc_auc": 0.87,
+    "gini_coefficient": 0.74,
+    "ks_statistic": 0.584,
+    "ks_optimal_threshold": 0.0651,
+    "brier_score": 0.0485,
+    "decision_threshold": 0.0742,
+    "precision": 0.2244,
+    "recall": 0.7753,
+    "f1_score": 0.348,
+    "specificity": 0.808,
+    "true_positives": 1166,
+    "false_positives": 4031,
+    "true_negatives": 16965,
+    "false_negatives": 338
+  },
+  "credit_score_summary": {
+    "mean": 735.9,
+    "median": 751,
+    "min": 300,
+    "max": 850,
+    "tier_distribution": {
+      "Tier 1 - Excellent": 13100,
+      "Tier 2 - Good": 4203,
+      "Tier 4 - Subprime": 1524,
+      "Tier 3 - Fair": 3673
+    }
+  }
+}
