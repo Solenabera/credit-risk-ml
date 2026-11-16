@@ -79,3 +79,18 @@ If you wish to run the project without Docker:
 To ensure the integrity of the data validation and the ML pipeline, run the Pytest suite:
 ```bash
 python -m pytest
+
+
+# API USage example
+{
+  "RevolvingUtilizationOfUnsecuredLines": 0.5,
+  "age": 45,
+  "NumberOfTime30-59DaysPastDueNotWorse": 0,
+  "DebtRatio": 0.3,
+  "MonthlyIncome": 6000.0,
+  "NumberOfOpenCreditLinesAndLoans": 5,
+  "NumberOfTimes90DaysLate": 0,
+  "NumberRealEstateLoansOrLines": 1,
+  "NumberOfTime60-89DaysPastDueNotWorse": 0,
+  "NumberOfDependents": 2
+}
